@@ -31,12 +31,26 @@ router.get("/users", (req, res) => {
     );
 });
 
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  Users.findById(id)
+    .then(user => {
+      if (user[0]) {
+        res.status(200).json(user);
+      } else {
+        res.status(404).json({ message: "Invalid id" });
+      }
+    })
+    .catch(err => res.status(500).json({ message: "That id does not exist" }));
+});
+
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   Users.findBy({ username })
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
+        console.log(user);
         const token = genToken(user);
         res
           .status(201)
@@ -45,9 +59,7 @@ router.post("/login", (req, res) => {
         res.status(401).json({ message: "invalid credentials" });
       }
     })
-    .catch(err =>
-      res.status(500).json({ message: "Could not create a new user" })
-    );
+    .catch(err => res.status(500).json({ message: "Could not login" }));
 });
 
 const genToken = user => {

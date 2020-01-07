@@ -19,6 +19,11 @@ exports.up = function(knex) {
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
       tbl.string("joke", 128).notNullable();
+      tbl.string("punchline", 128).notNullable();
+      tbl
+        .boolean("private")
+        .notNullable()
+        .defaultTo(false);
     });
 };
 

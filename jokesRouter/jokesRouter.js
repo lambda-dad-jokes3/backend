@@ -22,7 +22,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/:id/add-joke", authorization, (req, res) => {
-  const jokeBody = { ...req.body, userId: req.params.id };
+  const jokeBody = req.body;
   Jokes.add(jokeBody)
     .then(joke => {
       console.log(jokeBody);
@@ -66,3 +66,6 @@ router.delete("/:id/delete-joke", (req, res) => {
 });
 
 module.exports = router;
+
+// joke;
+// punchline;

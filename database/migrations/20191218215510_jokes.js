@@ -18,7 +18,7 @@ exports.up = function(knex) {
         .inTable("users")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl.string("jokes", 128).notNullable();
+      tbl.string("joke", 128).notNullable();
     });
 };
 

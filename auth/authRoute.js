@@ -29,7 +29,7 @@ router.post("/register", (req, res) => {
   }
 });
 
-router.get("/users", (req, res) => {
+router.get("/", (req, res) => {
   Users.find()
     .then(user => res.status(200).json(user))
     .catch(err =>

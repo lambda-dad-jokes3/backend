@@ -1,7 +1,9 @@
 const db = require("../database/dbConfig");
 
-const add = joke => {
-  return db("jokes").insert(joke);
+const add = (joke, id) => {
+  return db("jokes")
+    .insert(joke)
+    .where({ userId: id });
 };
 
 const find = () => {

@@ -15,10 +15,16 @@ router.post("/register", (req, res) => {
     const hash = bcrypt.hashSync(user.password, 10);
 
     user.password = hash;
+    console.log("user", user);
     Users.add(user)
-      .then(user => res.status(201).json({ message: "user has been created" }))
+
+      .then(user => {
+        res.status(201).json(user);
+      })
       .catch(err =>
-        res.status(500).json({ message: "Could not create a new user" })
+        res
+          .status(500)
+          .json({ message: "Could not create a new user", error: err })
       );
   }
 });

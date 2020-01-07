@@ -1,19 +1,19 @@
 BASE URL https://dadjokesdb.herokuapp.com
 
 #EndPoints
-GET /api/users/
+GET /api/user/
   -Returns all Users
  
-GET /api/users/:id
+GET /api/user/:id
   -Returns user with specific id 
   
-POST /api/users/register 
+POST /api/user/register 
   -input: 
     -username -Required
     -password -Required
   -Returns a success message
   
-  POST /api/users/login
+  POST /api/user/login
     -input: 
       -username -Required
       -password -Required

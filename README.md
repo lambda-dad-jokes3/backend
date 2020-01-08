@@ -6,28 +6,69 @@ BASE URL: https://dadjokesdb.herokuapp.com
 
 #EndPoints
 
-POST /api/user/register
+POST /user/register
+---
 
-  `-input: 
-    -username -Required
-    -password -Required
-  -Returns a success message`
+    `-input: 
+      -username -Required
+      -password -Required
+      
+    -Returns a success message`
   
-  POST /api/user/login
+POST /user/login
+---
   
     `-input: 
       -username -Required
       -password -Required
+      
     -Returns a token`
     
-GET /api/user/
+GET /user/
+---
 
   `-Returns all Users`
  
-GET /api/user/:id
+GET /user/:id
+---
 
   `-Returns user with specific id `
   
+GET /jokes/
+  ---
+      `-Returns all jokes`
+      
+GET /jokes/:id
+---
 
+      `-Returns jokes by user id`
+  
+POST /jokes/:id/add-joke
+  ---
+  
+    `-input: 
+        -question -Required
+        -punchline -Required
+        -public -Required
+        
+        -Requires token
+      -Returns a success message`
+      
+PUT /jokes/:id/edit-joke
+---
+
+    `-input: 
+        -question -Required
+        -punchline -Required
+        -public -Required
+        
+        -Requires token
+      -Returns a success message`
+  
+DELETE /jokes/:id/delete-joke
+---
+
+      `-Requires Token
+      -Returns success message`
   
   

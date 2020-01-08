@@ -10,20 +10,20 @@ exports.up = function(knex) {
     })
     .createTable("jokes", tbl => {
       tbl.increments();
-      // tbl
-      //   .integer("userId")
-      //   .unsigned()
-      //   .notNullable()
-      //   .references("id")
-      //   .inTable("users")
-      //   .onDelete("CASCADE")
-      //   .onUpdate("CASCADE");
-      tbl.string("joke", 128).notNullable();
-      // tbl.string("punchline", 128).notNullable();
-      // tbl
-      //   .boolean("private")
-      //   .notNullable()
-      //   .defaultTo(false);
+      tbl
+        .integer("userId")
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("users")
+        .onDelete("CASCADE")
+        .onUpdate("CASCADE");
+      tbl.string("question", 128).notNullable();
+      tbl.string("punchline", 128).notNullable();
+      tbl
+        .boolean("public")
+        .notNullable()
+        .defaultTo(true);
     });
 };
 

@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const Jokes = require("./jokesModel");
-const authorization = require("../auth/auth-middleware");
 
 router.get("/", (req, res) => {
   Jokes.find()
@@ -21,7 +20,7 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json({ message: "This id does not exist" }));
 });
 
-router.post("/:id/add-joke", authorization, (req, res) => {
+router.post("/:id/add-joke", (req, res) => {
   const jokeBody = { ...req.body, userId: req.params.id };
   console.log("jokebody", jokeBody);
 
@@ -44,7 +43,8 @@ router.put("/:id/edit-joke", (req, res) => {
 
   Jokes.updateJoke(id, changes)
     .then(update => {
-      res.status(200).json({ message: `Joke ${update.id} has been updated` });
+      console.log("update", update);
+      res.status(200).json({ message: `Joke ${update} has been updated` });
     })
     .catch(err =>
       res

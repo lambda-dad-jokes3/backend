@@ -9,7 +9,7 @@ const find = () => {
 };
 
 const findById = id => {
-  return db("jokes").where({ id });
+  return db("jokes").where("userId", "=", id);
 };
 
 const remove = id => {

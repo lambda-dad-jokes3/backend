@@ -26,8 +26,8 @@ router.post("/:id/add-joke", (req, res) => {
 
   Jokes.add(jokeBody)
     .then(joke => {
-      console.log(jokeBody);
-      res.status(201).json(joke);
+      console.log(joke);
+      res.status(201).json({ message: "joke was created" });
     })
     .catch(err =>
       res.status(500).json({
@@ -44,7 +44,7 @@ router.put("/:id/edit-joke", (req, res) => {
   Jokes.updateJoke(id, changes)
     .then(update => {
       console.log("update", update);
-      res.status(200).json({ message: `Joke ${update} has been updated` });
+      res.status(200).json(update);
     })
     .catch(err =>
       res
@@ -68,6 +68,3 @@ router.delete("/:id/delete-joke", (req, res) => {
 });
 
 module.exports = router;
-
-// joke;
-// punchline;

@@ -1,9 +1,7 @@
 const db = require("../database/dbConfig");
 
-const add = (joke, id) => {
-  return db("jokes")
-    .insert(joke)
-    .where({ userId: id });
+const add = joke => {
+  return db("jokes").insert(joke);
 };
 
 const find = () => {
@@ -11,7 +9,7 @@ const find = () => {
 };
 
 const findById = id => {
-  return db("jokes as j").where({ id });
+  return db("jokes").where({ id });
 };
 
 const remove = id => {

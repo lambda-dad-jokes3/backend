@@ -21,10 +21,11 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(500).json({ message: "This id does not exist" }));
 });
 
-router.post("/:id/add-joke", (req, res) => {
-  const jokeBody = req.body;
-  const { id } = req.params;
-  Jokes.add(jokeBody, id)
+router.post("/:id/add-joke", authorization, (req, res) => {
+  const jokeBody = { ...req.body, userId: req.params.id };
+  console.log("jokebody", jokeBody);
+
+  Jokes.add(jokeBody)
     .then(joke => {
       console.log(jokeBody);
       res.status(201).json(joke);

@@ -22,19 +22,29 @@ router.get("/:id", (req, res) => {
 
 router.post("/:id/add-joke", (req, res) => {
   const jokeBody = { ...req.body, userId: req.params.id };
-  console.log("jokebody", jokeBody);
+  if (!jokeBody.question) {
+    res.status(404).json({ message: "Please add a question" });
+  } else if (!jokeBody.punchline) {
+    res.status(404).json({ message: "Please add a punchline" });
+  } else if (!jokeBody.public) {
+    res.status(404).json({ message: "Please add public option" });
+  } else if (!id) {
+    res.status(404).json({ message: "This id does not exist" });
+  } else {
+    console.log("jokebody", jokeBody);
 
-  Jokes.add(jokeBody)
-    .then(joke => {
-      console.log(joke);
-      res.status(201).json({ message: "joke was created" });
-    })
-    .catch(err =>
-      res.status(500).json({
-        message: "There was a problem with creating the joke",
-        error: err
+    Jokes.add(jokeBody)
+      .then(joke => {
+        console.log(joke);
+        res.status(201).json({ message: "joke was created" });
       })
-    );
+      .catch(err =>
+        res.status(500).json({
+          message: "There was a problem with creating the joke",
+          error: err
+        })
+      );
+  }
 });
 
 router.put("/:id/edit-joke", (req, res) => {
@@ -56,15 +66,19 @@ router.put("/:id/edit-joke", (req, res) => {
 router.delete("/:id/delete-joke", (req, res) => {
   const id = req.params.id;
 
-  Jokes.remove(id)
-    .then(joke => {
-      res.status(200).json({ message: "Joke was deleted" });
-    })
-    .catch(err =>
-      res
-        .status(500)
-        .json({ message: "There was a problem with deleting the joke" })
-    );
+  if (!id) {
+    res.status(404).json({ message: "That id does not exist" });
+  } else {
+    Jokes.remove(id)
+      .then(joke => {
+        res.status(200).json({ message: "Joke was deleted" });
+      })
+      .catch(err =>
+        res
+          .status(500)
+          .json({ message: "There was a problem with deleting the joke" })
+      );
+  }
 });
 
 module.exports = router;

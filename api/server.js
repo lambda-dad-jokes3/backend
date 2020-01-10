@@ -3,10 +3,10 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const server = express();
-const authorization = require("./auth/auth-middleware");
+const authorization = require("../auth/auth-middleware");
 
-const authRouter = require("./auth/authRoute");
-const jokesRouter = require("./jokesRouter/jokesRouter");
+const authRouter = require("../auth/authRoute");
+const jokesRouter = require("../jokesRouter/jokesRouter");
 
 server.use(morgan("dev"));
 server.use(helmet());

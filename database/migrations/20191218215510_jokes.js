@@ -18,8 +18,8 @@ exports.up = function(knex) {
         .inTable("users")
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
-      tbl.string("question", 128).notNullable();
-      tbl.string("punchline", 128).notNullable();
+      tbl.string("question", 1000).notNullable();
+      tbl.string("punchline", 1000).notNullable();
       tbl
         .boolean("public")
         .notNullable()
